@@ -3,6 +3,14 @@
 {% block title %}Home{% endblock title %}
 
 {% block banner_slider %}
+<head>
+  <style>
+    .img-fluid {
+  margin-left: auto;
+  margin-right: auto;
+}
+  </style>
+</head>
 <!--Banner Slider-->
  <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
@@ -81,22 +89,8 @@
      </div>
    </div>
   </div>
-  <div class="col-sm-3">
-   <div class="card mb-3">
-     <div class="card-body">
-      <img src="{% static 'app/images/payavail/bj.jpg' %}" alt="" srcset="" class="img-fluid">
-     </div>
-   </div>
-  </div>
  </div>
 </div>
-<!-- End Payment Info Section -->
-
-<!-- 2nd Product Slider -->
-<div class="mx-3">
-
-    </div>
 </div>
-<!-- End 2nd Product Slider -->
 {% endblock main-content %}
 

@@ -2,12 +2,15 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
 
+
 STATE_CHOICE=(('Maharashtra','Maharashtra'),
               ('Gujrat','Gujrat'))
+
 
 class Customer(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
+    contact = models.CharField(max_length=13)
     locality = models.CharField(max_length=200)
     city = models.CharField(max_length=200)
     zipcode = models.IntegerField()
@@ -67,3 +70,6 @@ class OrderPlaced(models.Model):
     @property
     def total_cost(self):
         return self.quantity * self.product.discounted_price
+
+
+

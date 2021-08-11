@@ -7,28 +7,35 @@ from django.db.models import Q
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+import razorpay
 
 
 class ProductView(View):
     def get(self, request):
+        totalitem = 0
         cold_pressed_edible_oil = Product.objects.filter(category='oil')
         organic_jaggery = Product.objects.filter(category='jag')
         rock_salt = Product.objects.filter(category='salt')
         raw_honey = Product.objects.all()  # retriving all products
+        if request.user.is_authenticated:
+            totalitem = len(Cart.objects.filter(user=request.user))
         return render(request, 'app/home.html',
                       {'coldpressedoil': cold_pressed_edible_oil, 'organic_jaggery': organic_jaggery,
-                       'rocck_salt': rock_salt, 'raw_honey': raw_honey})
+                       'rocck_salt': rock_salt, 'raw_honey': raw_honey, 'totalitem':totalitem})
 
 
 class ProductDetailView(View):
     def get(self, request, pk):
+        totalitem = 0
         product = Product.objects.get(pk=pk)
         item_already_in_cart = False
         if request.user.is_authenticated:
+            totalitem = len(Cart.objects.filter(user=request.user))
             item_already_in_cart = Cart.objects.filter(Q(product=product.id) & Q(user=request.user)).exists()
 
         return render(request, 'app/productdetail.html',
-                      {'product': product,'item_already_in_cart':item_already_in_cart})
+                      {'product': product,'item_already_in_cart':item_already_in_cart,'totalitem':totalitem})
+
 
 @method_decorator(login_required, name='dispatch')
 class ProfileView(View):
@@ -41,14 +48,16 @@ class ProfileView(View):
         if form.is_valid():
             usr= request.user
             name = form.cleaned_data['name']
+            contact = form.cleaned_data['contact']
             locality = form.cleaned_data['locality']
             city = form.cleaned_data['city']
             state = form.cleaned_data['state']
             zipcode = form.cleaned_data['zipcode']
-            reg = Customer(user=usr,name=name, locality=locality, city=city, state=state, zipcode=zipcode)
+            reg = Customer(user=usr,name=name,contact=contact, locality=locality, city=city, state=state, zipcode=zipcode)
             reg.save()
             messages.success(request, 'Congratulations! profile updated successfully')
         return render(request, 'app/profile.html', {'form': form, 'active': 'btn-primary'})
+
 
 @login_required
 def add_to_cart(request):
@@ -59,9 +68,12 @@ def add_to_cart(request):
 
     return redirect('/cart')
 
+
 @login_required
 def show_cart(request):
+    totalitem = 0
     if request.user.is_authenticated:
+        totalitem = len(Cart.objects.filter(user=request.user))
         user = request.user
         cart = Cart.objects.filter(user=user)
         amount=0.0
@@ -73,9 +85,10 @@ def show_cart(request):
                 tempamount = (p.quantity * p.product.discounted_price)
                 amount += tempamount
                 totalamount= amount+shipping_amount
-            return render(request, 'app/addtocart.html', {'carts': cart, 'totalamount': totalamount, 'amount': amount})
+            return render(request, 'app/addtocart.html', {'carts': cart, 'totalamount': totalamount, 'amount': amount,'totalitem': totalitem})
         else:
             return render(request, 'app/emptycart.html')
+
 
 def plus_cart(request):
     if request.method == 'GET':
@@ -184,6 +197,8 @@ def checkout(request):
     add =Customer.objects.filter(user=user)
     cart_items = Cart.objects.filter(user=user)
     amount = 0.0
+    order_currency = 'INR'
+    client = razorpay.Client(auth=('rzp_test_WNhWPKp15oAlyK','IklCxCrX4xRA6nzKlds7x3Rn'))
     shipping_amount=0.0
     totalamount=0.0
     cart_product = [p for p in Cart.objects.all() if p.user ==
@@ -193,6 +208,7 @@ def checkout(request):
             tempamount = (p.quantity * p.product.discounted_price)
             amount += tempamount
         totalamount=amount+shipping_amount
+        payment = client.order.create({'amount':amount, 'currency': 'INR','payment_capture': '1'})
     return render(request, 'app/checkout.html',{'add':add, 'totalamount':totalamount,'cart_items':cart_items})
 
 

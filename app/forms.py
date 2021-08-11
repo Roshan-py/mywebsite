@@ -6,16 +6,18 @@ from django.contrib.auth.models import User
 from .models import Customer
 
 
+
 class CustomerRegistrationForm(UserCreationForm):
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput(attrs={'class': 'form-control'})) #here class is used for bootstrap
     password2 = forms.CharField(label='Confirm Password', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
     email = forms.CharField(required=True, widget=forms.EmailInput(attrs={'class': 'form-control'}))
 
+
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
-        labels = {'email': 'Email Id'}
+        labels = {'email':'Email'}
         widgets = {'username': forms.TextInput(attrs={'class': 'form-control'})}
 
 
@@ -54,11 +56,14 @@ class UserSetPasswordForm(SetPasswordForm):
                                     widget=forms.PasswordInput(
                                         attrs={'autocomplete': 'new-password', 'class': 'form-control'}))
 
+
 class CustomerProfileForm(forms.ModelForm):
     class Meta:
         model = Customer
-        fields = ['name','locality','city','state','zipcode']
+        fields = ['name','contact','locality','city','state','zipcode']
+        labels = {'contact': 'Contact No:'}
         widgets = {'name':forms.TextInput(attrs={'class':'form-control'}),
+                   'contact':forms.NumberInput(attrs={'class':'form-control'}),
                    'locality':forms.TextInput(attrs={'class':'form-control'}),
                    'city':forms.TextInput(attrs={'class':'form-control'}),
                    'state':forms.Select(attrs={'class':'form-control'}),

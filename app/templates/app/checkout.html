@@ -16,13 +16,13 @@
         </div>
       </div>
     {% endfor %}
-    <p class="fw-bold" >Total Cost + RS. 0.0 = {{totalamount}}</p>
+    <p class="fw-bold" >Total Cost + shipping RS. 0.0 = {{totalamount}}</p>
     <small>Term and Condition: Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, ullam saepe! Iure optio repellat dolor velit, minus rem. Facilis cumque neque numquam laboriosam, accusantium adipisci nisi nihil in et quis?</small>
   </div>
   <div class="col-sm-4 offset-sm-1">
     <h4>Select Shipping Address</h4>
     <hr>
-    <form action="/paymentdone">
+    <form action="/paymentdone" id = 'paymentform'>
       {% for ad in add %}
       <div class="card">
         <div class="card-body">
@@ -31,16 +31,67 @@
         </div>
       </div>
         <div class="form-check mt-2 mb-5">
-          <input class="form-check-input" type="radio" name="custid" id="custadd{{forloop.counter}}" value="{{ad.id}}">
+          <input class="form-check-input" type="radio" name="custid" id="custadd{{forloop.counter}}" value="{{ad.id}}" required>
           <label class="form-check-label fw-bold" for="">
             Address:{{forloop.counter}} </label>
         </div>
       {% endfor %}
         <div class="text-end">
-          <button type="submit" class="btn btn-warning mt-3 px-5 fw-bold">Continue</button>
+         <!-- <button type="submit" class="btn btn-warning mt-3 px-5 fw-bold">Continue</button> -->
         </div>
       </form>
     </div>
   </div>
 </div>
 {% endblock main-content %}
+{% block payment-gateway %}
+<!-- razorpay payment integration -->
+<button class="btn btn-warning mt-3 px-5 fw-bold" style="margin-left:900px;"  id="rzp-button1">Pay with Razorpay</button>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+var options = {
+    "key": "rzp_test_WNhWPKp15oAlyK", // Enter the Key ID generated from the Dashboard
+    "amount": "{{totalamount}}"*100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    "currency": "INR",
+    "name": "Santushti oils and foods",
+    "description": "Test Transaction",
+    "image": "https://example.com/your_logo",
+    "order_id": "{{payment.id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+    "handler": function (response){
+        alert(response.razorpay_payment_id);
+        alert(response.razorpay_order_id);
+        document.getElementById('paymentform').submit();
+    },
+    "prefill": {
+        "name": "roshan yadav",
+        "email": "roshanyadav@example.com",
+        "contact": "7020244683"
+    },
+    "notes": {
+        "address": "Razorpay Corporate Office"
+    },
+    "theme": {
+        "color": "#3399cc"
+    }
+};
+var rzp1 = new Razorpay(options);
+rzp1.on('payment.failed', function (response){
+        alert(response.error.code);
+        alert(response.error.description);
+        alert(response.error.source);
+        alert(response.error.step);
+        alert(response.error.reason);
+        alert(response.error.metadata.order_id);
+        alert(response.error.metadata.payment_id);
+});
+document.getElementById('rzp-button1').onclick = function(e){
+    rzp1.open();
+    e.preventDefault();
+
+
+}
+</script>
+
+
+
+{% endblock payment-gateway %}
