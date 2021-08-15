@@ -20,7 +20,7 @@ class Customer(models.Model):
         return str(self.id)
 
 CATEGORY_CHOICE=(
-    ('oil','cold pressed edible oil'),
+    ('oil','c'),
     ('jag','organic jaggery'),
     ('salt','Rock salt'),
     ('honey','Raw honey')

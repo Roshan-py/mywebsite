@@ -1,3 +1,9 @@
+.navbar:hover {
+  color: rgba(255, 255, 255, 1);
+  box-shadow: 0 5px 15px rgba(145, 92, 182, .4);
+}
+
+
 .owl-carousel .item{
  /* border: 1px solid black; */
  font-size: 24px;
@@ -18,4 +24,15 @@
 .owl-next span{
  font-size: 24px;
  font-weight: bold;
+}
+.whatsapp{
+position: fixed;
+right: 0px;
+top: 52%;
+}
+.whatsapp h5 {
+color: white;
+background: #20b20f;
+padding: 12px;
+border-radius: 10px;
 }

@@ -24,6 +24,10 @@
                             <h5 class="mt-0 font-weight-bold mb-2">{{o.title}}</h5>
                             <p class="font-italic text-muted mb-0 small">{{o.description}}</p>
                         </div><img src="{{o.product_image.url}}" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
+                        <form action="/add-to-cart" class="d-inline">
+                        <input type="hidden" name="prod_id" value="{{product.id}}" id="prod_id">
+                        <button type="submit" class="btn btn-primary shadow px-5 py-2">Add To Cart</button>
+                        </form>
                         {% endfor %}
                     </div> <!-- End -->
                 </li> <!-- End -->

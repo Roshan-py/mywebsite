@@ -22,9 +22,9 @@
     <title>Shop Santushti | {% block title %} {% endblock title %} </title>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
      <div class="container">
-       <a class="navbar-brand" href="/">Shop at Santushti</a>
+       <a class="navbar-brand" href="/">Shop at Labhesshh</a>
        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
          <span class="navbar-toggler-icon"></span>
        </button>
@@ -43,7 +43,7 @@
              </ul>
            </li>
              <li class="nav-item">
-             <a class="nav-link active" aria-current="page" href="{% url 'aboutus' %}">About Santushti oils</a>
+             <a class="nav-link active" aria-current="page" href="{% url 'aboutus' %}">About Us</a>
            </li>
 
          </ul>
@@ -82,6 +82,10 @@
        </div>
      </div>
     </nav>
+    <div class="whatsapp">
+        <a href="https://api.whatsapp.com/send?phone=919021442906"target="_blank"><h5><i class="fa fa-comments fa-2x" aria-hidden="true"></i> </h5></a>
+        <a href="tel:9021442906" target="_blank"><h5><i class="fa fa-phone-square fa-2x" aria-hidden="true"></i> </h5></a>
+    </div>
     {% block banner_slider %} {% endblock banner_slider %}
     {% block livesale %} {% endblock livesale %}
     {% block main-content %} {% endblock main-content %}
@@ -89,6 +93,9 @@
 
     <!-- Start Footer -->
     <footer class="container-fluid bg-dark text-center p-2 mt-5">
+        <i class="fa fa-location-arrow text-white" style="font-size:24px"></i><p class="text-white">Address: Shop no. 3, Chishti Apartment, mogalwadi road, Khopoli. </p>
+        <i class="fa fa-envelope text-white" style="font-size:24px"></i><p class="text-white">santushtioilsandfoods@gmail.com</p>
+        <i class="fa fa-phone-square text-white" style="font-size:24px"></i><p class="text-white">+919021442906</p>
         <small class="text-white">Copyright &copy; 2021 || Designed By Roshan Yadav || </small>
         <img src="{% static 'app/images/payment.png' %}" alt="" srcset="" class="img-fluid" height="2px">
     </footer> <!-- End Footer -->
@@ -101,5 +108,6 @@
     <script src="{% static 'app/js/owl.carousel.min.js' %}"></script>
     <script src="{% static 'app/js/all.min.js' %}"></script>
     <script src="{% static 'app/js/myscript.js' %}"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
   </body>
 </html>

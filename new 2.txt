@@ -1,0 +1,41 @@
+PRODUCT LIST
+=============
+COLD PRESSED OILS
+1. Groundnut oil:- 5ltr, 1ltr, 500ml
+2. Safflower oil:- 5ltr, 1ltr, 500ml
+3. Sunflower oil:- 5ltr, 1ltr, 500ml
+4. Mustard oil:-   5ltr, 1ltr, 500ml, 200ml
+5. Sesame oil:-    5ltr, 1ltr, 500ml, 200ml
+6. Cocunut Oil:-   5ltr, 1ltr, 500ml, 200ml
+7. Almond Oil:-    1ltr, 500ml, 200ml,100ml,50ml
+8. Castor Oil:-    1ltr, 500ml, 200ml,100ml,50ml
+
+=============
+JAGGERY
+1. Organic Jaggery:- 950grams
+2. Masala Jaggery:- 1kg
+3. Jaggery Powder:- 450grams
+4. jaggerycubes(gulkali) - 450grams
+
+=============
+Navmi Rocksalt:- 1kg, 500grams
+
+=============
+Honey
+1. Raw Honey:- 250grams
+2. Jamun Honey:- 250grams
+3. Tulsi Honey:- 250grams
+
+
+
+additional feature requirements
+
+whatsapp button 
+call button
+
+Email notification after order placed
+message
+
+out of stock 
+
+
