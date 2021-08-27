@@ -126,12 +126,12 @@ a.button:hover{
 </head>
 <div id="wrap">
 	<div id="columns" class="columns_3">
-        {% for o in all_products %}
+        {% for j in jaggery %}
   <figure>
-  <img src="{{o.product_image.url}}">
-	<figcaption>{{o.title}}</figcaption>
-    <span class="price">Rs.{{o.discounted_price}}</span>
-    <a class="button" href="{% url 'product-detail' o.id %}">Buy Now</a>
+  <img src="{{j.product_image.url}}">
+	<figcaption>{{j.title}}</figcaption>
+    <span class="price">Rs.{{j.discounted_price}}</span>
+    <a class="button" href="{% url 'product-detail' j.id %}">Buy Now</a>
 	</figure>
         {% endfor %}
 </div>

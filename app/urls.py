@@ -55,7 +55,7 @@ urlpatterns = [
                                                                        authentication_form=CustomerLoginForm),
                        name='Login'),
                   path('logout/', auth_views.LogoutView.as_view(next_page='Login'), name='logout'),
-                  path('mobile/', views.mobile, name='mobile'),
+                  path('jaggeryandothers/', views.jaggery, name='jaggery'),
                   path('registration/', views.CustomerRegistrationView.as_view(), name='customerregistration'),
 
                   path('checkout/', views.checkout, name='checkout'),
