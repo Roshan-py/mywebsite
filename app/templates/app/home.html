@@ -9,6 +9,37 @@
   margin-left: auto;
   margin-right: auto;
 }
+.button {
+        background-color: #1c87c9;
+        -webkit-border-radius: 60px;
+        border-radius: 60px;
+        border: none;
+        color: #eeeeee;
+        cursor: pointer;
+        display: inline-block;
+        font-family: sans-serif;
+        font-size: 20px;
+        padding: 10px 10px;
+        text-align: center;
+        text-decoration: none;
+      }
+      @keyframes glowing {
+        0% {
+          background-color: #2ba805;
+          box-shadow: 0 0 5px #2ba805;
+        }
+        50% {
+          background-color: #49e819;
+          box-shadow: 0 0 20px #49e819;
+        }
+        100% {
+          background-color: #2ba805;
+          box-shadow: 0 0 5px #2ba805;
+        }
+      }
+      .button {
+        animation: glowing 1300ms infinite;
+      }
   </style>
 </head>
 <!--Banner Slider-->
@@ -53,44 +84,38 @@
 
 {% block main-content %}
 <!-- 1st Product Slider -->
+
 <div class="m-3">
- <h2>Santushti Products</h2>
-    <div class="owl-carousel" id="slider2">
-    {% for ra in raw_honey %}
-     <a class="btn" href="{% url 'product-detail' ra.id %}">
-         <div class="item"><img src="{{ra.product_image.url}}" alt="" height="200px"><span
-                 class="fw-bold">{{ra.title}}</span><br><span class="fs-5">Rs.{{ra.discounted_price}}</span></div>
+ <h2>Labhesshh Products</h2>
+    <div class="owl-carousel" id="slider1">
+    {% for o in oil_products %}
+     <a class="btn" href="{% url 'product-detail' o.id %}">
+         <div class="item"><img src="{{o.product_image.url}}" alt="" height="200px"><span
+                 class="fw-bold">{{o.title}}</span><br><span class="fs-5">Rs.{{o.discounted_price}}</span></div>
          {% endfor %}
      </a>
  </div>
-<!-- End 1st Product Slider -->
+    <a class="button" href="{% url 'oilproducts' %}">All Labhesshh Oil Products!</a>
 
-<!-- Payment Info Section -->
-<div class="container my-5">
- <div class="row">
-  <div class="col-sm-3">
-   <div class="card mb-3">
-     <div class="card-body">
-     <img src="{% static 'app/images/payavail/cc.jpg' %}" alt="" srcset="" class="img-fluid">
-     </div>
-   </div>
-  </div>
-  <div class="col-sm-3">
-   <div class="card mb-3">
-     <div class="card-body">
-      <img src="{% static 'app/images/payavail/upi.jpg' %}" alt="" srcset="" class="img-fluid">
-     </div>
-   </div>
-  </div>
-  <div class="col-sm-3">
-   <div class="card mb-3">
-     <div class="card-body">
-      <img src="{% static 'app/images/payavail/nb.jpg' %}" alt="" srcset="" class="img-fluid">
-     </div>
-   </div>
-  </div>
+<!-- End 1st Product Slider -->
+    <br>
+    <br>
+    <br>
+<!-- 2nd Product Slider -->
+<div class="m-3">
+ <h2>Jaggery and Other Products</h2>
+    <div class="owl-carousel" id="slider2">
+    {% for j in jaggery %}
+     <a class="btn" href="{% url 'product-detail' j.id %}">
+         <div class="item"><img src="{{j.product_image.url}}" alt="" height="200px"><span
+                 class="fw-bold">{{j.title}}</span><br><span class="fs-5">Rs.{{j.discounted_price}}</span></div>
+         {% endfor %}
+     </a>
  </div>
+    <a class="button" href="{% url 'jaggery' %}">Click here for jaggery and others!</a>
+
+<!-- End 2nd Product Slider -->
 </div>
-</div>
+    </div>
 {% endblock main-content %}
 

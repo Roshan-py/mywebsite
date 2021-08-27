@@ -13,15 +13,12 @@ import razorpay
 class ProductView(View):
     def get(self, request):
         totalitem = 0
-        cold_pressed_edible_oil = Product.objects.filter(category='oil')
         organic_jaggery = Product.objects.filter(category='jag')
-        rock_salt = Product.objects.filter(category='salt')
-        raw_honey = Product.objects.all()  # retriving all products
+        oil_products = Product.objects.filter(category='oil')
         if request.user.is_authenticated:
             totalitem = len(Cart.objects.filter(user=request.user))
         return render(request, 'app/home.html',
-                      {'coldpressedoil': cold_pressed_edible_oil, 'organic_jaggery': organic_jaggery,
-                       'rocck_salt': rock_salt, 'raw_honey': raw_honey, 'totalitem':totalitem})
+                      {'jaggery': organic_jaggery, 'oil_products': oil_products, 'totalitem':totalitem})
 
 
 class ProductDetailView(View):
@@ -173,11 +170,6 @@ def orders(request):
     op= OrderPlaced.objects.filter(user=request.user)
     return render(request, 'app/orders.html',{'order_placed':op})
 
-
-def mobile(request):
-    return render(request, 'app/mobile.html')
-
-
 class CustomerRegistrationView(View):
     def get(self, request):
         form = CustomerRegistrationForm()
@@ -225,8 +217,12 @@ def payment_done(request):
 
 
 def oilproducts(request):
-    all_products = Product.objects.all()
+    all_products = Product.objects.filter(category='oil')
     return render(request, 'app/oilproducts.html', {'all_products': all_products})
+
+def jaggery(request):
+    jaggery = Product.objects.filter(category='jag')
+    return render(request, 'app/jaggeryandothers.html',{'jaggery': jaggery})
 
 def aboutus(request):
     return render(request,'app/aboutus.html')

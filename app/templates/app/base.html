@@ -24,7 +24,7 @@
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-success">
      <div class="container">
-       <a class="navbar-brand" href="/">Shop at Labhesshh</a>
+       <a class="navbar-brand" href="/"><img src="{% static 'app/images/labhesshh.jpg' %}" alt="..." height="40" width="130" style="background-color: green;"></a>
        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
          <span class="navbar-toggler-icon"></span>
        </button>
@@ -39,7 +39,7 @@
              </a>
              <ul class="dropdown-menu" aria-labelledby="electronicsDropdown">
                <li><a class="dropdown-item" href="{% url 'oilproducts' %}">Cold pressed oil</a></li>
-               <li><a class="dropdown-item" href="#">Jaggery & others</a></li>
+               <li><a class="dropdown-item" href="{% url 'jaggery' %}">Jaggery & others</a></li>
              </ul>
            </li>
              <li class="nav-item">
@@ -59,13 +59,16 @@
               <a class="nav-link dropdown-toggle text-white" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 {{request.user}}
               </a>
+
               <ul class="dropdown-menu" aria-labelledby="profileDropdown">
                 <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
-                <li><a class="dropdown-item" href="{% url 'orders' %}">Orders</a></li>
                 <li><a class="dropdown-item" href="{% url 'passwordchange' %}">Change Password</a></li>
                 <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
               </ul>
             </li>
+              <li class="nav-item mx-2">
+                  <a href="{% url 'orders' %}" class="nav-link text-white">My Orders</a>
+              </li>
             <li class="nav-item mx-2">
              <a href="{% url 'showcart' %}" class="nav-link text-white"><span class="badge bg-danger">{{totalitem}}</span> Cart </a>
             </li>
@@ -93,7 +96,7 @@
 
     <!-- Start Footer -->
     <footer class="container-fluid bg-dark text-center p-2 mt-5">
-        <i class="fa fa-location-arrow text-white" style="font-size:24px"></i><p class="text-white">Address: Shop no. 3, Chishti Apartment, mogalwadi road, Khopoli. </p>
+        <i class="fa fa-location-arrow text-white" style="font-size:24px"></i><p class="text-white">Shop no. 3, Chishti Apartment, mogalwadi road, Khopoli, Dist-Raigad, 410203 </p>
         <i class="fa fa-envelope text-white" style="font-size:24px"></i><p class="text-white">santushtioilsandfoods@gmail.com</p>
         <i class="fa fa-phone-square text-white" style="font-size:24px"></i><p class="text-white">+919021442906</p>
         <small class="text-white">Copyright &copy; 2021 || Designed By Roshan Yadav || </small>

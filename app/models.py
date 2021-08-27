@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
+import os
+from twilio.rest import Client
 
 
 STATE_CHOICE=(('Maharashtra','Maharashtra'),
@@ -71,5 +73,19 @@ class OrderPlaced(models.Model):
     def total_cost(self):
         return self.quantity * self.product.discounted_price
 
+    def save(self, *args, **kwargs):
+        if self.status == 'Pending':
+            account_sid = 'AC32344962b328200c5cba65a558f9895e'
+            auth_token = 'bb96b5d6bacfe452e3071cd71d687549'
+            client = Client(account_sid, auth_token)
+
+            message = client.messages.create(
+                body=f"you have new order from {self.user}, of {self.product}",
+                from_='+12562875021',
+                to='+917020244683'
+            )
+
+            print(message.sid)
+        return super().save(*args,**kwargs)
 
 
